@@ -1,10 +1,8 @@
-// pages/create-note.tsx
-"use client"
-import { Note } from "@/components/NotesComponents"
-import { useParams, useRouter } from "next/navigation"
-import React, { useEffect, useState } from "react"
+'use client'
+import { useParams } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
 
-interface EditNoteFormProps {}
+import { Note } from '@/components/NotesComponents'
 
 const EditNoteForm: React.FC = () => {
   const [note, setNote] = useState<Note | null>(null)
@@ -16,18 +14,17 @@ const EditNoteForm: React.FC = () => {
       try {
         const response = await fetch(`/api/notes/${noteId}`)
         if (!response.ok) {
-          throw new Error("Error fetching note")
+          throw new Error('Error fetching note')
         }
         const data = await response.json()
         setNote(data)
-      } catch (error) {
-        console.error(error)
       } finally {
         setLoading(false)
       }
     }
 
     fetchNote()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   if (loading) {
@@ -58,7 +55,7 @@ const EditNoteForm: React.FC = () => {
           defaultValue={note.title}
           value={note.title}
           required
-          className="mt-1 block w-full rounded-md bg-gray-800 border-gray-600 text-white"
+          className="mt-1 block w-full rounded-md border-gray-600 bg-gray-800 text-white"
         />
       </div>
       <div>
@@ -74,13 +71,13 @@ const EditNoteForm: React.FC = () => {
           defaultValue={note.content}
           required
           rows={4}
-          className="mt-1 block w-full rounded-md bg-gray-800 border-gray-600 text-white"
+          className="mt-1 block w-full rounded-md border-gray-600 bg-gray-800 text-white"
         />
       </div>
       <div>
         <button
           type="submit"
-          className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+          className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700"
         >
           Update Note
         </button>

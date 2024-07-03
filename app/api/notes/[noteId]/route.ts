@@ -1,5 +1,6 @@
-import { createClient } from "@/utils/supabase/server"
-import { NextRequest, NextResponse } from "next/server"
+import { NextRequest, NextResponse } from 'next/server'
+
+import { createClient } from '@/utils/supabase/server'
 
 export async function GET(
   request: NextRequest,
@@ -10,9 +11,9 @@ export async function GET(
   const noteId = params.noteId
 
   const { data: notes, error } = await supabase
-    .from("notes")
-    .select("*")
-    .eq("id", noteId)
+    .from('notes')
+    .select('*')
+    .eq('id', noteId)
     .single()
 
   if (error) {
@@ -31,9 +32,9 @@ export async function PATCH(
   const { title, content } = await request.json()
 
   const { data, error } = await supabase
-    .from("notes")
+    .from('notes')
     .update({ title, content })
-    .eq("id", noteId)
+    .eq('id', noteId)
     .select()
 
   if (error) {
@@ -51,12 +52,11 @@ export async function DELETE(
 
   const noteId = params.noteId
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { error, count, status } = await supabase
-    .from("notes")
+    .from('notes')
     .delete()
-    .eq("id", noteId)
-
-  console.log({ error, count, status })
+    .eq('id', noteId)
 
   if (error) {
     return NextResponse.json({ error }, { status: 404 })

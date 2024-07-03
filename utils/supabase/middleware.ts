@@ -1,5 +1,5 @@
-import { createServerClient, type CookieOptions } from "@supabase/ssr"
-import { type NextRequest, NextResponse } from "next/server"
+import { createServerClient, type CookieOptions } from '@supabase/ssr'
+import { type NextRequest, NextResponse } from 'next/server'
 
 export const updateSession = async (request: NextRequest) => {
   // Create an unmodified response
@@ -39,7 +39,7 @@ export const updateSession = async (request: NextRequest) => {
           // If the cookie is removed, update the cookies for the request and response
           request.cookies.set({
             name,
-            value: "",
+            value: '',
             ...options,
           })
           response = NextResponse.next({
@@ -49,7 +49,7 @@ export const updateSession = async (request: NextRequest) => {
           })
           response.cookies.set({
             name,
-            value: "",
+            value: '',
             ...options,
           })
         },
@@ -63,20 +63,20 @@ export const updateSession = async (request: NextRequest) => {
     data: { user },
   } = await supabase.auth.getUser()
 
-  if (request.nextUrl.pathname.startsWith("/test")) {
+  if (request.nextUrl.pathname.startsWith('/test')) {
     return response
   }
 
-  if (request.nextUrl.pathname.startsWith("/api/auth")) {
+  if (request.nextUrl.pathname.startsWith('/api/auth')) {
     return response
   }
 
-  if (!user && request.nextUrl.pathname.startsWith("/api")) {
-    return new Response("Unauthorized", { status: 401 })
+  if (!user && request.nextUrl.pathname.startsWith('/api')) {
+    return new Response('Unauthorized', { status: 401 })
   }
 
-  if (!user && !request.nextUrl.pathname.startsWith("/login")) {
-    const url = new URL("/login", request.url)
+  if (!user && !request.nextUrl.pathname.startsWith('/login')) {
+    const url = new URL('/login', request.url)
     return Response.redirect(url)
   }
 

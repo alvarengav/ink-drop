@@ -1,6 +1,7 @@
-"use server"
-import { createClient } from "@/utils/supabase/server"
-import AuthButton from "./AuthButton"
+'use server'
+import { createClient } from '@/utils/supabase/server'
+
+import AuthButton from './AuthButton'
 
 export default async function NavBar() {
   const canInitSupabaseClient = () => {
@@ -15,8 +16,8 @@ export default async function NavBar() {
   const isSupabaseConnected = canInitSupabaseClient()
   return (
     <>
-      <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-        <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
+      <nav className="flex h-16 w-full justify-center border-b border-b-foreground/10">
+        <div className="flex w-full max-w-4xl items-center justify-between p-3 text-sm">
           <h1>Ink Drop</h1>
           {isSupabaseConnected && <AuthButton />}
         </div>

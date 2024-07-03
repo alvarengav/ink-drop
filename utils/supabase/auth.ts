@@ -1,5 +1,5 @@
-import { GetServerSidePropsContext, GetServerSidePropsResult } from "next"
-import { createClient } from "./server"
+import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
+import { createClient } from './server'
 
 export async function checkAuth(
   context: GetServerSidePropsContext
@@ -13,7 +13,7 @@ export async function checkAuth(
   if (!user) {
     return {
       redirect: {
-        destination: "/login",
+        destination: '/login',
         permanent: false,
       },
     }

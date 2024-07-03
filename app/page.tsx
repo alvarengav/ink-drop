@@ -1,5 +1,5 @@
-import { createClient } from "@/utils/supabase/server"
-import NotesComponent from "@/components/NotesComponents"
+import NotesComponent from '@/components/NotesComponents'
+import { createClient } from '@/utils/supabase/server'
 
 export default async function Index() {
   const canInitSupabaseClient = () => {
@@ -13,7 +13,7 @@ export default async function Index() {
     }
   }
 
-  const isSupabaseConnected = canInitSupabaseClient()
+  canInitSupabaseClient()
 
   return (
     <div>

@@ -1,9 +1,10 @@
-import { createClient } from "@/utils/supabase/server"
-import { NextRequest, NextResponse } from "next/server"
+import { NextRequest, NextResponse } from 'next/server'
+
+import { createClient } from '@/utils/supabase/server'
 
 export async function GET() {
   const supabase = createClient()
-  const { data: notes, error } = await supabase.from("notes").select("*")
+  const { data: notes, error } = await supabase.from('notes').select('*')
 
   if (error) {
     return NextResponse.json({ error }, { status: 500 })
@@ -22,7 +23,7 @@ export async function POST(request: NextRequest) {
   } = await supabase.auth.getUser()
 
   const { data, error } = await supabase
-    .from("notes")
+    .from('notes')
     .insert([{ title, content, user_id: user?.id }])
     .select()
 

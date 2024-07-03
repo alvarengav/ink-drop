@@ -1,8 +1,9 @@
-"use client"
-import { useEffect, useState } from "react"
-import NoteCard from "./NoteCard"
-import { PlusIcon } from "@heroicons/react/24/solid"
-import Link from "next/link"
+'use client'
+import { PlusIcon } from '@heroicons/react/24/solid'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+
+import NoteCard from './NoteCard'
 
 export interface Note {
   id: string
@@ -20,7 +21,7 @@ const NotesComponent: React.FC<NotesComponentProps> = () => {
 
   useEffect(() => {
     const fetchNotes = async () => {
-      const response = await fetch("/api/notes")
+      const response = await fetch('/api/notes')
 
       if (response.ok) {
         const data = await response.json()
@@ -35,16 +36,16 @@ const NotesComponent: React.FC<NotesComponentProps> = () => {
   if (isLoading) return <div>Loading...</div>
 
   return (
-    <div className="text-white h-screen p-8">
+    <div className="h-screen p-8 text-white">
       <div className="mb-8">
         <input
           type="text"
           placeholder="Search note..."
-          className="w-full p-4 rounded-lg bg-gray-900 text-white placeholder-gray-500 focus:outline-none"
+          className="w-full rounded-lg bg-gray-900 p-4 text-white placeholder-gray-500 focus:outline-none"
         />
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {notes.map((note) => (
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        {notes.map(note => (
           <NoteCard
             key={note.id}
             id={note.id}
@@ -59,7 +60,7 @@ const NotesComponent: React.FC<NotesComponentProps> = () => {
       </div>
       <Link
         href="/notes/create"
-        className="fixed right-8 bottom-8 bg-blue-500 bg-opacity-70 hover:bg-opacity-80 p-4 rounded-full shadow-lg text-white text-xl transition duration-300 ease-in-out transform hover:scale-110 flex items-center justify-center"
+        className="fixed bottom-8 right-8 flex transform items-center justify-center rounded-full bg-blue-500 bg-opacity-70 p-4 text-xl text-white shadow-lg transition duration-300 ease-in-out hover:scale-110 hover:bg-opacity-80"
         aria-label="Create note"
         passHref
       >
