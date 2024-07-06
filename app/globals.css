@@ -20,10 +20,45 @@
   }
 }
 
-@layer base {
+@layer components {
   * {
     @apply border-foreground/20;
   }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center rounded-md border border-transparent px-4 py-2 text-xs font-semibold uppercase tracking-widest transition duration-150 ease-in-out disabled:opacity-25;
+
+    &-rounded {
+      @apply inline-flex items-center rounded-full border border-transparent p-4 text-xs font-semibold uppercase tracking-widest transition duration-150 ease-in-out disabled:opacity-25;
+    }
+
+    &-primary {
+      @apply bg-green text-white hover:bg-green-500 focus:border-green-700 focus:outline-none focus:ring focus:ring-green-200 active:bg-green-700;
+    }
+
+    &-danger {
+      @apply bg-white text-dark-500;
+    }
+  }
+}
+
+/* Custom scrollbar styles */
+.custom-scrollbar::-webkit-scrollbar {
+  @apply h-2 w-2;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-dark;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply rounded border-2 border-dark bg-dark-100;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-dark-200;
 }
 
 .animate-in {

@@ -1,4 +1,4 @@
-import NotesComponent from '@/components/NotesComponents'
+import NotesList from '@/components/NotesList'
 import { createClient } from '@/utils/supabase/server'
 
 export default async function Index() {
@@ -16,8 +16,8 @@ export default async function Index() {
   canInitSupabaseClient()
 
   return (
-    <div>
-      <NotesComponent />
+    <div className="border-0 border-white">
+      <NotesList />
     </div>
   )
 }

@@ -1,9 +1,9 @@
-import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
+import { GetServerSidePropsResult } from 'next'
+
 import { createClient } from './server'
 
-export async function checkAuth(
-  context: GetServerSidePropsContext
-): Promise<GetServerSidePropsResult<any>> {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function checkAuth(): Promise<GetServerSidePropsResult<any>> {
   const supabase = createClient()
 
   const {

@@ -1,83 +1,63 @@
-import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline'
+import { PencilIcon, TrashIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 
+import { Tables } from '@/types/database.types'
+import { formatDate } from '@/utils/date'
+
 interface NoteCardProps {
-  id: string
-  title: string
-  content: string
-  date_created: Date
-  date_updated: Date
   onEdit: (id: string) => void
   onDelete: (id: string) => void
+  note: Tables<'notes'>
 }
 
 const NoteCard: React.FC<NoteCardProps> = ({
-  id,
-  title,
-  content,
-  date_created,
-  date_updated,
+  note,
   // onEdit,
   // onDelete,
 }) => {
-  const dateCreated = new Date(date_created)
-  const formattedCreatedDate = dateCreated.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  })
+  const { id, title, content, created_at, updated_at } = note
 
-  const dateUpdated = new Date(date_updated)
-  const formattedUpdatedDate = dateUpdated.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  })
-
-  // Colores tomados de la imagen proporcionada, ajusta según la paleta exacta de tu proyecto
-  const cardBackgroundColor = 'bg-gray-800' // Ajustado para un contraste mejorado sobre fondo oscuro
-  const dateTextColor = 'text-gray-400' // Color gris para las fechas
-  const editButtonColor = 'bg-blue-500 bg-opacity-50 hover:bg-opacity-70'
-  const deleteButtonColor = 'bg-red-500 bg-opacity-50 hover:bg-opacity-70'
-  const iconColor = 'text-white text-opacity-90' // Iconos menos dominantes
-  const iconSize = 'h-4 w-4' // Tamaño de los iconos ajustado para coincidir con la imagen
+  const formattedCreatedAt = formatDate(created_at)
+  const formattedUpdatedAt = formatDate(updated_at)
 
   return (
     <div
-      className={`flex flex-col justify-between rounded-lg p-4 shadow-md ${cardBackgroundColor}`}
+      className={`flex flex-col justify-between rounded-lg bg-dark-300 p-4 shadow-card`}
     >
       <div>
         <h3 className={`mb-2 text-lg font-semibold text-white`}>{title}</h3>
-        <p className={`mb-4 text-gray-300`}>{content}</p>
+        <p className="custom-scrollbar mb-4 max-h-48 overflow-y-auto text-text-accent">
+          {content}
+        </p>
       </div>
       <div className="flex flex-col">
         <div className="flex flex-col text-sm">
-          <span className={`${dateTextColor}`}>
-            Created: {formattedCreatedDate}
+          <span className="text-text-secondary">
+            Created: {formattedCreatedAt}
           </span>
-          {date_updated && (
-            <span className={`${dateTextColor}`}>
-              Updated: {formattedUpdatedDate}
+          {formattedUpdatedAt && (
+            <span className="text-text-secondary">
+              Updated: {formattedUpdatedAt}
             </span>
           )}
         </div>
-        <div className="flex-justify-end ml-auto mt-3 flex">
+        <div className="flex-justify-end ml-auto mt-8 flex gap-4">
+          <button
+            className="btn btn-danger"
+            // onClick={onDelete}
+            aria-label="Delete note"
+          >
+            <TrashIcon className="mr-2 h-5 w-5" /> Delete
+          </button>
           <Link
             href={`/notes/edit/${id}`}
-            className={`rounded-full bg-blue-600 p-2 ${editButtonColor} mr-2`}
+            className="btn btn-primary"
             // onClick={onEdit}
             aria-label="Edit note"
             passHref
           >
-            <PencilIcon className={`text-white ${iconColor} ${iconSize}`} />
+            <PencilIcon className="mr-2 h-4 w-4" /> Edit
           </Link>
-          <button
-            className={`rounded-full p-2 ${deleteButtonColor}`}
-            // onClick={onDelete}
-            aria-label="Delete note"
-          >
-            <TrashIcon className={`text-white ${iconColor} ${iconSize}`} />
-          </button>
         </div>
       </div>
     </div>

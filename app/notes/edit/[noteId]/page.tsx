@@ -2,7 +2,7 @@
 import { useParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
-import { Note } from '@/components/NotesComponents'
+import { Note } from '@/components/NotesList'
 
 const EditNoteForm: React.FC = () => {
   const [note, setNote] = useState<Note | null>(null)
