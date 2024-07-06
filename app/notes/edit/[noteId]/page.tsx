@@ -2,8 +2,9 @@
 import { useParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
-import { Note } from '@/components/NotesList'
+import { Tables } from '@/types/database.types'
 
+type Note = Tables<'notes'>
 const EditNoteForm: React.FC = () => {
   const [note, setNote] = useState<Note | null>(null)
   const [loading, setLoading] = useState(true)
@@ -52,8 +53,8 @@ const EditNoteForm: React.FC = () => {
           type="text"
           id="title"
           name="title"
-          defaultValue={note.title}
-          value={note.title}
+          defaultValue={note.title || ''}
+          value={note.title || ''}
           required
           className="mt-1 block w-full rounded-md border-gray-600 bg-gray-800 text-white"
         />
@@ -68,7 +69,7 @@ const EditNoteForm: React.FC = () => {
         <textarea
           id="content"
           name="content"
-          defaultValue={note.content}
+          defaultValue={note.content || ''}
           required
           rows={4}
           className="mt-1 block w-full rounded-md border-gray-600 bg-gray-800 text-white"

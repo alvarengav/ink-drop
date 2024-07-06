@@ -27,7 +27,7 @@ const CreateNoteForm: React.FC = () => {
   }
 
   return (
-    <div className="mt-10 flex w-full justify-center p-8">
+    <div className="flex w-full justify-center p-8">
       <div className="w-full max-w-lg">
         <Link href={'/'} className="btn px-0 normal-case">
           <ArrowLongLeftIcon className="mr-2 h-6 w-6" /> Go back

@@ -13,7 +13,7 @@ const NotesList: React.FC<NotesList> = async () => {
   const { data: notes } = await supabase.from('notes').select()
 
   return (
-    <div className="mb-24 p-8 text-white">
+    <div className="mb-24 px-8 text-white">
       <div className="mb-8">
         <Input
           type="text"

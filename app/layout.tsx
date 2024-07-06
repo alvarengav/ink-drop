@@ -18,7 +18,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     <html lang="en" className={GeistSans.className}>
       <body className="bg-background text-foreground">
         <Header />
-        <main className="mx-auto min-h-screen max-w-4xl flex-col items-center border-0 border-white">
+        <main className="mx-auto min-h-screen max-w-4xl flex-col items-center border-0 border-white py-8">
           {children}
         </main>
       </body>
